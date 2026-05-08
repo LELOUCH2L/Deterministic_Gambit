@@ -373,8 +373,10 @@ class StatsWindow:
             results[r] = results.get(r, 0) + 1
         if not results:
             self._no_data(parent); return
-        labels = list(results.keys())
-        sizes  = list(results.values())
+        # Sort descending by count
+        sorted_items = sorted(results.items(), key=lambda x: x[1], reverse=True)
+        labels = [k for k,v in sorted_items]
+        sizes  = [v for k,v in sorted_items]
         colors = [GREEN if 'Player' in l else (RED if 'AI' in l else ACCENT) for l in labels]
         fig, canvas = self._make_fig_canvas(parent)
         ax = fig.add_subplot(111)
@@ -383,7 +385,7 @@ class StatsWindow:
         legend_labels = [f"{lbl}: {cnt} ({round(100*cnt/total_games,1)}%)"
                          for lbl,cnt in zip(labels,sizes)]
         wedges, _ = ax.pie(
-            sizes, colors=colors, startangle=90,
+            sizes, colors=colors, startangle=90, counterclock=False,
             wedgeprops={'edgecolor': 'none', 'linewidth': 0}
         )
         ax.legend(wedges, legend_labels,
