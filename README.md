@@ -10,6 +10,10 @@ Deterministic Gambit is a single-player chess variant built with Python and Pyga
 
 ## Installation
 
+**Requirements:**
+- Python 3.13.x (Python 3.14+ is not supported — Pygame is not compatible)
+- Stockfish chess engine (see note below)
+
 To clone this project:
 ```sh
 git clone https://github.com/LELOUCH2L/Deterministic_Gambit.git
